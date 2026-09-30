@@ -45,11 +45,31 @@ type FormatPart = str | CatchAll | Index
 
 
 class TemplateChunkKeyEncodingConfiguration(TypedDict):
+    """TypedDict representing the configuration object within the Zarr v3 metadata representing the template chunk key encoding.
+
+    i.e.
+
+        {
+          "format": "{*}",
+          "separator": "/"
+        }
+    """
     format: str
     separator: NotRequired[str | None]
 
 
 class TemplateChunkKeyEncodingMetadata(TypedDict):
+    """TypedDict representing the Zarr v3 metadata representing the template chunk key encoding.
+
+    i.e.
+
+        {
+          "name": "template",
+          "configuration": {
+            ... // see TemplateChunkKeyEncodingConfiguration type
+          }
+        }
+    """
     name: Literal["template"]
     configuration: TemplateChunkKeyEncodingConfiguration
 

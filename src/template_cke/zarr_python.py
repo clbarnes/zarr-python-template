@@ -13,7 +13,7 @@ from .impl import (
 
 @dataclass(frozen=True)
 class TemplateChunkKeyEncoding(ChunkKeyEncoding):
-    """Chunk key encoding for use with zarr-python."""
+    """Template chunk key encoding for use with zarr-python."""
 
     format: str
     separator: str | None = None
