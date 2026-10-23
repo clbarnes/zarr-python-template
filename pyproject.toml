@@ -1,5 +1,5 @@
 [project]
-name = "template_cke"
+name = "zarr-template"
 version = "0.1.0"
 description = "Implementation of the template extension for chunk key encoding in zarr v3"
 readme = "README.md"
@@ -13,7 +13,7 @@ requires = ["uv_build>=0.13.5,<0.14"]
 build-backend = "uv_build"
 
 [project.entry-points."zarr.chunk_key_encoding"]
-"template" = "template_cke.zarr_python:TemplateChunkKeyEncoding"
+"template" = "zarr_template:TemplateChunkKeyEncoding"
 
 [dependency-groups]
 dev = [

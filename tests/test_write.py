@@ -2,7 +2,7 @@ import pytest
 import zarr
 from zarr.storage import MemoryStore
 
-from template_cke import TemplateChunkKeyEncoding
+from zarr_template import TemplateChunkKeyEncoding
 
 
 def test_write_zarr(data):

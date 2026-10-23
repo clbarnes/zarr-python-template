@@ -1,4 +1,4 @@
-from template_cke.impl import TemplateChunkKeyEncoder, parse_format
+from zarr_template.impl import TemplateChunkKeyEncoder, parse_format
 
 FORMAT = "potato{0}-{2}/${4:03}_{*},{-1}suffix"
 
