@@ -8,7 +8,11 @@ dependencies = [
     "zarr>=3.4.0",
 ]
 
-[project.entry-points."zarr.chunk_key_encodings"]
+[build-system]
+requires = ["uv_build>=0.13.5,<0.14"]
+build-backend = "uv_build"
+
+[project.entry-points."zarr.chunk_key_encoding"]
 "template" = "template_cke.zarr_python:TemplateChunkKeyEncoding"
 
 [dependency-groups]

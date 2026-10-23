@@ -1,4 +1,3 @@
-from . import impl
 from .impl import (
     TemplateChunkKeyEncodingConfiguration,
     TemplateChunkKeyEncodingMetadata,
@@ -9,5 +8,4 @@ __all__ = [
     "TemplateChunkKeyEncoding",
     "TemplateChunkKeyEncodingConfiguration",
     "TemplateChunkKeyEncodingMetadata",
-    "impl",
 ]

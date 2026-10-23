@@ -753,7 +753,7 @@ wheels = [
 [[package]]
 name = "template-cke"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "zarr" },
 ]
