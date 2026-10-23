@@ -758,11 +758,6 @@ dependencies = [
     { name = "zarr" },
 ]
 
-[package.optional-dependencies]
-zarr-python = [
-    { name = "zarr" },
-]
-
 [package.dev-dependencies]
 dev = [
     { name = "mypy" },
@@ -775,11 +770,7 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "zarr", specifier = ">=3.4.0" },
-    { name = "zarr", marker = "extra == 'zarr-python'", specifier = ">=3.4.0" },
-]
-provides-extras = ["zarr-python"]
+requires-dist = [{ name = "zarr", specifier = ">=3.4.0" }]
 
 [package.metadata.requires-dev]
 dev = [

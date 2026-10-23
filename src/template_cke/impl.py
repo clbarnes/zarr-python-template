@@ -54,6 +54,7 @@ class TemplateChunkKeyEncodingConfiguration(TypedDict):
           "separator": "/"
         }
     """
+
     format: str
     separator: NotRequired[str | None]
 
@@ -70,6 +71,7 @@ class TemplateChunkKeyEncodingMetadata(TypedDict):
           }
         }
     """
+
     name: Literal["template"]
     configuration: TemplateChunkKeyEncodingConfiguration
 
@@ -81,7 +83,7 @@ class TemplateChunkKeyEncoder:
         self.parts = parts
         self.separator = separator
         self.has_catchall = False
-        self.idxs = set()
+        self.idxs: set[int] = set()
         self.largest_idx = -1
         for p in parts:
             if isinstance(p, CatchAll):

@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
-from typing import ClassVar, Literal
+from typing import ClassVar, Literal, cast
 
 from zarr.core.chunk_key_encodings import ChunkKeyEncoding
+from zarr.core.common import JSON
 from zarr.registry import register_chunk_key_encoding
 
 from .impl import (
     TemplateChunkKeyEncoder,
     TemplateChunkKeyEncodingConfiguration,
-    TemplateChunkKeyEncodingMetadata,
 )
 
 
@@ -27,12 +27,12 @@ class TemplateChunkKeyEncoding(ChunkKeyEncoding):
     def encode_chunk_key(self, chunk_coords: tuple[int, ...]) -> str:
         return self.encoder.encode(chunk_coords)
 
-    def to_dict(self) -> TemplateChunkKeyEncodingMetadata:
+    def to_dict(self) -> dict[str, JSON]:
         config: TemplateChunkKeyEncodingConfiguration = {"format": self.format}
         if self.separator:
             config["separator"] = self.separator
 
-        return {"name": self.name, "configuration": config}
+        return {"name": self.name, "configuration": cast(JSON, config)}
 
 
 register_chunk_key_encoding("template", TemplateChunkKeyEncoding)
