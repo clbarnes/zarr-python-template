@@ -1,6 +1,6 @@
 [project]
 name = "zarr-template"
-version = "0.1.0"
+version = "0.1.1"
 description = "Implementation of the template extension for chunk key encoding in zarr v3"
 readme = "README.md"
 requires-python = ">=3.12"
