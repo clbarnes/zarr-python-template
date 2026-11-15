@@ -1,5 +1,6 @@
+from collections.abc import Mapping
 from dataclasses import dataclass, field
-from typing import ClassVar, Literal, cast
+from typing import ClassVar, Literal, Self, cast
 
 from zarr.core.chunk_key_encodings import ChunkKeyEncoding
 from zarr.core.common import JSON
@@ -33,6 +34,20 @@ class TemplateChunkKeyEncoding(ChunkKeyEncoding):
             config["separator"] = self.separator
 
         return {"name": self.name, "configuration": cast(JSON, config)}
+
+    @classmethod
+    def from_dict(cls, data: dict[str, JSON]) -> Self:
+        if (
+            (config := data.get("configuration"))
+            and isinstance(config, Mapping)
+            and "template" not in config
+            and "format" in config
+        ):
+            config = dict(config)
+            config["template"] = config.pop("format")
+            data["configuration"] = config
+
+        return super(cls, cls).from_dict(data)
 
 
 register_chunk_key_encoding("template", TemplateChunkKeyEncoding)
