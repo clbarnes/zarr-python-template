@@ -44,7 +44,7 @@ def read_tsv():
 
 @pytest.mark.parametrize(("example",), [[eg] for eg in read_tsv()], ids=id_fn)
 def test_examples(example: Example):
-    cke = zarr_template.impl.TemplateChunkKeyEncoder.from_format(
+    cke = zarr_template.impl.TemplateChunkKeyEncoder.from_template(
         example.template, example.separator
     )
     out = cke.encode(example.chunk_coordinate)

@@ -16,7 +16,7 @@
   "chunk_key_encoding": {
     "name": "template",
     "configuration": {
-      "format": "c/{*}.chunk",
+      "template": "c/{*}.chunk",
       "separator": "/"
     }
   },
