@@ -41,7 +41,7 @@ class Index:
         return self.index < 0
 
 
-type FormatPart = str | CatchAll | Index
+type TemplatePart = str | CatchAll | Index
 
 
 class TemplateChunkKeyEncodingConfiguration(TypedDict):
@@ -50,12 +50,12 @@ class TemplateChunkKeyEncodingConfiguration(TypedDict):
     i.e.
 
         {
-          "format": "{*}",
+          "template": "{*}",
           "separator": "/"
         }
     """
 
-    format: str
+    template: str
     separator: NotRequired[str | None]
 
 
@@ -79,7 +79,7 @@ class TemplateChunkKeyEncodingMetadata(TypedDict):
 class TemplateChunkKeyEncoder:
     """Generic chunk key encoder for use with any zarr library."""
 
-    def __init__(self, parts: list[FormatPart], separator: str | None = None) -> None:
+    def __init__(self, parts: list[TemplatePart], separator: str | None = None) -> None:
         self.parts = parts
         self.separator = separator
         self.has_catchall = False
@@ -98,13 +98,13 @@ class TemplateChunkKeyEncoder:
                 self.largest_idx = max(self.largest_idx, p.index)
 
     @classmethod
-    def from_format(cls, format: str, separator: str | None = None) -> Self:
-        parts = list(parse_format(format))
+    def from_template(cls, template: str, separator: str | None = None) -> Self:
+        parts = list(parse_template(template))
         return cls(parts, separator)
 
     @classmethod
     def from_config(cls, config: TemplateChunkKeyEncodingConfiguration) -> Self:
-        return cls.from_format(**config)
+        return cls.from_template(**config)
 
     @classmethod
     def from_metadata(cls, metadata: TemplateChunkKeyEncodingMetadata) -> Self:
@@ -140,7 +140,7 @@ class TemplateChunkKeyEncoder:
 
         if catchall is not None:
             if self.separator is None:
-                raise ValueError("Format had catchall but no separator given")
+                raise ValueError("Template had catchall but no separator given")
             out_parts[catchall[0]] = catchall[1].encode(
                 coord, used_idxs, self.separator
             )
@@ -173,7 +173,7 @@ def _strget(s: str, idx: int) -> str | None:
     return s[idx]
 
 
-def parse_format(fmt: str) -> Iterable[FormatPart]:
+def parse_template(fmt: str) -> Iterable[TemplatePart]:
     idx = 0
     buf: list[str] = []
     in_brace = False

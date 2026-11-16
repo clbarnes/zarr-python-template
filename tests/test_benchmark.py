@@ -1,10 +1,10 @@
-from zarr_template.impl import TemplateChunkKeyEncoder, parse_format
+from zarr_template.impl import TemplateChunkKeyEncoder, parse_template
 
-FORMAT = "potato{0}-{2}/${4:03}_{*},{-1}suffix"
+TEMPLATE = "potato{0}-{2}/${4:03}_{*},{-1}suffix"
 
 
 def parse_encoder():
-    return list(parse_format(FORMAT))
+    return list(parse_template(TEMPLATE))
 
 
 def test_bench_parse(benchmark):
@@ -12,6 +12,6 @@ def test_bench_parse(benchmark):
 
 
 def test_benchmark_interp(benchmark):
-    enc = TemplateChunkKeyEncoder.from_format(FORMAT, "/")
+    enc = TemplateChunkKeyEncoder.from_template(TEMPLATE, "/")
     coord = (0, 1, 2, 3, 4, 5, 6)
     benchmark(lambda: enc.encode(coord))

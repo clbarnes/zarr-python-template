@@ -5,6 +5,13 @@ from zarr.storage import MemoryStore
 from zarr_template import TemplateChunkKeyEncoding
 
 
+def test_writes_template():
+    cke = TemplateChunkKeyEncoding("{0}_{1}.jpeg")
+    d = cke.to_dict()
+    assert "template" in d["configuration"]  # type:ignore
+    assert "format" not in d["configuration"]  # type:ignore
+
+
 def test_write_zarr(data):
     store = MemoryStore()
     arr = zarr.create_array(
